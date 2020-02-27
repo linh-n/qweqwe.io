@@ -12,6 +12,7 @@
   "author": "International Trade Centre",
   "browserslist": "> 0.25%, not dead, ie >= 9",
   "scripts": {
+    "server": "node server/index.js",
     "start": "webpack-dev-server -d --colors --hot --config ./webpack.config.js --host localhost --port 1010",
     "clean": "del-cli dist/*",
     "build": "webpack-cli --mode development --optimize-minimize --env.compress --env.analyze",
@@ -67,6 +68,7 @@
     "@reduxjs/toolkit": "^1.2.5",
     "connected-react-router": "^6.7.0",
     "core-js": "^3.6.4",
+    "express": "^4.17.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-ga": "^2.7.0",
