@@ -1,9 +1,25 @@
 version: "3"
 services:
-  react-prod:
+  qweqwe-prod:
     container_name: react-prod
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/qweqwe.io/nginx/vhost.d:/etc/nginx/vhost.d
+      - /etc/qweqwe.io/nginx/certs:/etc/nginx/certs:ro
+      - /etc/qweqwe.io/nginx/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: unless-stopped
+
+  qweqwe_encrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /etc/qweqwe.io/nginx/certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - qweqwe-prod
+    restart: unless-stopped
