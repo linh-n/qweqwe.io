@@ -1,0 +1,24 @@
+{
+  "javascript.validate.enable": false,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "node_modules": true,
+    "dist": true,
+    "coverage": true,
+    "**/__snapshots__": true,
+    "translations": true
+    // - PER PROJECT -
+    // "src/sites/africa": true,
+    // "src/sites/bhutan": true,
+    // "src/sites/qatar": true,
+    // "src/sites/global": true
+  }
+}

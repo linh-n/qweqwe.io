@@ -1,0 +1,82 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "process": false
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-constant-condition": [
+      "error",
+      {
+        "checkLoops": false
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "no-console": [
+      "warn"
+    ],
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowTaggedTemplates": true
+      }
+    ],
+    "no-unused-vars": [
+      "warn"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 110,
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreStrings": true
+      }
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "object-curly-newline": "off",
+    "arrow-body-style": [
+      "error",
+      "as-needed"
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "function-paren-newline": "off",
+    "react/prefer-stateless-function": [
+      0
+    ],
+    "react/jsx-filename-extension": [
+      0
+    ],
+    "react/display-name": "off",
+    "react/require-default-props": [
+      "error"
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  }
+}

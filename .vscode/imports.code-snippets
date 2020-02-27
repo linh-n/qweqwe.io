@@ -1,0 +1,61 @@
+{
+  "react": {
+    "prefix": "react",
+    "scope": "javascript",
+    "body": ["import React from \"react\";"]
+  },
+  "connect": {
+    "prefix": "connect",
+    "scope": "javascript",
+    "body": ["import { connect } from \"react-redux\";"]
+  },
+  "react-redux-hooks": {
+    "prefix": ["useSelector", "useDispatch"],
+    "scope": "javascript",
+    "body": ["import { useSelector, useDispatch } from \"react-redux\";"]
+  },
+  "prop-types": {
+    "prefix": "prop-types",
+    "scope": "javascript",
+    "body": ["import PropTypes from \"prop-types\";"]
+  },
+  "immer": {
+    "prefix": ["immer", "produce"],
+    "scope": "javascript",
+    "body": ["import produce from \"immer\";"]
+  },
+  "styled-components": {
+    "prefix": "styled",
+    "scope": "javascript",
+    "body": ["import styled from \"styled-components\";"]
+  },
+  "grid": {
+    "prefix": "grid",
+    "scope": "javascript",
+    "body": ["import { Flex, Box } from \"@rebass/grid\";"]
+  },
+  "rtl": {
+    "prefix": "rtl",
+    "scope": "javascript",
+    "body": ["import rtl from \"utils/rtl\";"]
+  },
+  "intl": {
+    "prefix": "intl",
+    "scope": "javascript",
+    "body": ["import { FormattedMessage, FormattedNumber } from \"react-intl\";"]
+  },
+  "icon": {
+    "prefix": "icon",
+    "body": [
+      "import { FontAwesomeIcon } from \"@fortawesome/react-fontawesome\";",
+      "import { faExternalLink } from \"@fortawesome/pro-light-svg-icons/faExternalLink\";"
+    ]
+  },
+  "resize": {
+    "prefix": "resize",
+    "body": [
+      "import useResizeAware from \"react-resize-aware\";",
+      "const [resizeListener, size] = useResizeAware();"
+    ]
+  }
+}
