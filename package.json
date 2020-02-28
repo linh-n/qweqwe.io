@@ -1,15 +1,11 @@
 {
-  "name": "global-trade-helpdesk",
+  "name": "qweqwe.io",
   "version": "0.0.1",
-  "homepage": "http://www.helpmetrade.org/",
+  "homepage": "https://qweqwe.io/",
   "description": "",
   "license": "",
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.itc-cci.net:MAR/gthd.git"
-  },
-  "main": "src/sites/global/index.js",
-  "author": "International Trade Centre",
+  "main": "src/index.js",
+  "author": "Linh Nguyen",
   "browserslist": "> 0.25%, not dead, ie >= 9",
   "scripts": {
     "server": "node server/index.js",
