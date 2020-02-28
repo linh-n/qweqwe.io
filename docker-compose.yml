@@ -1,13 +1,28 @@
 version: "3"
 services:
-  web:
-    container_name: react-prod
+  frontend:
+    container_name: frontend
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
-      - /etc/letsencrypt/live/qweqwe.io:/etc/letsencrypt
+      - static:/dist
+
+  webserver:
+    depends_on:
+      - frontend
+    image: staticfloat/nginx-certbot
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    environment:
+      CERTBOT_EMAIL: linh@mail.ch
+    volumes:
+      - static:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/user.conf.d:ro
+      - letsencrypt:/etc/letsencrypt
     restart: unless-stopped
+
+volumes:
+  static:
+  letsencrypt:
