@@ -9,7 +9,5 @@ RUN npm run build --silent
 FROM nginx:alpine
 # copy the build folder from react to the root of nginx (www)
 COPY --from=build /usr/src/app/qweqwe/dist /usr/share/nginx/html
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
