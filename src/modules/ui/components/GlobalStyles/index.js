@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  font-family: Nunito, sans-serif;
+  font-family: "Ubuntu Mono", sans-serif;
   font-size: ${props => props.theme.fontSize};
 }
 

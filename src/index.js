@@ -4,10 +4,11 @@ import React from "react";
 import WebFont from "webfontloader";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { ConnectedRouter } from "connected-react-router";
 // import ReactGA from "react-ga";
 
-import store, { history } from "./store";
+import store, { history, persistor } from "./store";
 
 import { LanguageProvider, ThemeProvider } from "modules/ui";
 import { setMessages, setAvailableLanguages } from "modules/ui/reducer";
@@ -24,20 +25,22 @@ store.dispatch(setMessages(messages));
 
 WebFont.load({
   google: {
-    families: ["Nunito:600,900:latin-ext"],
+    families: ["Ubuntu+Mono:400,400i,700:latin-ext"],
   },
 });
 
 const Root = () => (
   <Provider store={store}>
-    <ThemeProvider>
-      <GlobalStyle />
-      <LanguageProvider>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </ThemeProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <ThemeProvider>
+        <GlobalStyle />
+        <LanguageProvider>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </ThemeProvider>
+    </PersistGate>
   </Provider>
 );
 

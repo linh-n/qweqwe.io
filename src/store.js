@@ -3,6 +3,8 @@ import { ajax } from "rxjs/ajax";
 import { mergeMap } from "rxjs/operators";
 import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware, combineReducers } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
@@ -18,6 +20,11 @@ const rootReducer = combineReducers({
   ui: uiReducer,
   text2bettertext: text2bettertextReducer,
 });
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const epic$ = new BehaviorSubject(combineEpics(uiEpic));
 
@@ -31,9 +38,10 @@ const epicMiddleware = createEpicMiddleware({
 });
 const middleWares = [routerMiddleware(history), epicMiddleware];
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...middleWares)));
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(...middleWares)));
+const persistor = persistStore(store);
 
 epicMiddleware.run(rootEpic);
 
-export { epic$ };
+export { epic$, persistor };
 export default store;
