@@ -4,11 +4,28 @@ import styled from "styled-components";
 
 import { selectTableRowsForPreview } from "../../selectors";
 
+const TableContainer = styled.div`
+  overflow: scroll;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* thumb and track color */
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 7.5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+  }
+`;
+
 const Table = styled.table`
   color: #fff;
   border-spacing: 0;
   border-radius: 0 25px 0 0;
-  overflow: hidden;
 
   thead {
     text-align: left;
@@ -37,21 +54,27 @@ const Table = styled.table`
 export default () => {
   const tableRows = useSelector(selectTableRowsForPreview);
   return (
-    <Table>
-      {tableRows.length > 0 && (
-        <thead>
-          {tableRows[0].cells.map(cell => (
-            <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
+    <TableContainer>
+      <Table>
+        {tableRows.length > 0 && (
+          <thead>
+            <tr>
+              {tableRows[0].cells.map(cell => (
+                <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
+              ))}
+            </tr>
+          </thead>
+        )}
+        <tbody>
+          {tableRows.map(row => (
+            <tr key={`row-${row.index}`}>
+              {row.cells.map(cell => (
+                <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
+              ))}
+            </tr>
           ))}
-        </thead>
-      )}
-      {tableRows.map(row => (
-        <tr key={`row-${row.index}`}>
-          {row.cells.map(cell => (
-            <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
-          ))}
-        </tr>
-      ))}
-    </Table>
+        </tbody>
+      </Table>
+    </TableContainer>
   );
 };
