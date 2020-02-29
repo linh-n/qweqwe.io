@@ -106,6 +106,9 @@ module.exports = function(env) {
     resolve: {
       extensions: ["*", ".js", ".jsx"],
       modules: [path.resolve(__dirname, "src"), "node_modules"],
+      alias: {
+        "react-dom": "@hot-loader/react-dom",
+      },
     },
   };
 };

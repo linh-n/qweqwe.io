@@ -10,7 +10,7 @@
     "body": ["import { connect } from \"react-redux\";"]
   },
   "react-redux-hooks": {
-    "prefix": ["useSelector", "useDispatch"],
+    "prefix": ["selector", "dispatch"],
     "scope": "javascript",
     "body": ["import { useSelector, useDispatch } from \"react-redux\";"]
   },

@@ -8,7 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
 
 import { uiReducer, uiEpic } from "modules/ui";
-import textTransformerReducer from "modules/text-transformer/reducer";
+import text2bettertextReducer from "modules/text2bettertext/reducer";
 
 export const history = createBrowserHistory();
 
@@ -16,7 +16,7 @@ const routerReducer = connectRouter(history);
 const rootReducer = combineReducers({
   router: routerReducer,
   ui: uiReducer,
-  textTransformer: textTransformerReducer,
+  text2bettertext: text2bettertextReducer,
 });
 
 const epic$ = new BehaviorSubject(combineEpics(uiEpic));
