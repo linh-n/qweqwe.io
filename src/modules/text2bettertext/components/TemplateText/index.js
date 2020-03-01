@@ -3,13 +3,12 @@ import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setTemplateText } from "../../reducer";
-import { selectTemplateText } from "../../selectors";
+import { selectTemplateText } from "../../selectors/inputs";
 
 const TextEditor = styled.textarea`
   width: 100%;
   height: 100%;
   border: 0;
-  border-radius: 0 0 0 25px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* thumb and track color */

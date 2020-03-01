@@ -1,31 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { selectTableRowsForPreview } from "../../selectors";
-
-const TableContainer = styled.div`
-  overflow: scroll;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* thumb and track color */
-  scrollbar-width: thin;
-
-  &::-webkit-scrollbar {
-    width: 7.5px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-  }
-`;
+import { selectTableRowsForPreview } from "../../selectors/rows";
+import { setLayoutIsEditing } from "../../reducer";
 
 const Table = styled.table`
   color: #fff;
   border-spacing: 0;
-  border-radius: 0 25px 0 0;
+  width: 100%;
+  height: 100%;
 
   thead {
     text-align: left;
@@ -53,28 +37,28 @@ const Table = styled.table`
 
 export default () => {
   const tableRows = useSelector(selectTableRowsForPreview);
+  const dispatch = useDispatch();
+
   return (
-    <TableContainer>
-      <Table>
-        {tableRows.length > 0 && (
-          <thead>
-            <tr>
-              {tableRows[0].cells.map(cell => (
-                <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
-              ))}
-            </tr>
-          </thead>
-        )}
-        <tbody>
-          {tableRows.map(row => (
-            <tr key={`row-${row.index}`}>
-              {row.cells.map(cell => (
-                <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </TableContainer>
+    <Table onClick={() => dispatch(setLayoutIsEditing(true))}>
+      {tableRows.length > 0 && (
+        <thead>
+          <tr>
+            {tableRows[0].cells.map(cell => (
+              <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
+            ))}
+          </tr>
+        </thead>
+      )}
+      <tbody>
+        {tableRows.map(row => (
+          <tr key={`row-${row.index}`}>
+            {row.cells.map(cell => (
+              <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   );
 };

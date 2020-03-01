@@ -18,6 +18,7 @@ module.exports = function(api) {
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-syntax-nullish-coalescing-operator",
       "babel-plugin-styled-components",
       [
         "react-intl",

@@ -1,18 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import Container from "shared-components/Container";
 import Logo from "./Logo";
 
 const Header = styled.div`
-  padding: 10px 0;
+  padding: 10px 25px;
   flex: 0 0 auto;
 `;
 
 export default () => (
-  <Container>
-    <Header>
-      <Logo />
-    </Header>
-  </Container>
+  <Header>
+    <Logo />
+  </Header>
 );
