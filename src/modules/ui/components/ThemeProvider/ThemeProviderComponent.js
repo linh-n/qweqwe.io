@@ -5,7 +5,7 @@ import useResizeAware from "react-resize-aware";
 
 const defaultTheme = {
   containerWidth: 1100,
-  containerPadding: 40,
+  containerPadding: 25,
   colorBackground: "#3E75B0",
   colorLightBackground: "#f5f6f7",
   colorAccent: "#4CAF4F",
@@ -16,7 +16,7 @@ const defaultTheme = {
   fontWeightNormal: 600,
   fontWeightBold: 900,
   mobileTheme: {
-    containerPadding: 20,
+    containerPadding: 15,
     fontSize: "12px",
   },
 };

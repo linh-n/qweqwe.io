@@ -10,7 +10,7 @@ const Transformed = styled.div`
 
   pre {
     margin: 0;
-    padding: 15px 25px;
+    padding: 15px ${props => props.theme.containerPadding}px;
     color: #fff;
     font-family: ${props => props.theme.fontFamily};
   }

@@ -9,12 +9,18 @@ import {
 } from "../selectors/layout";
 import { setLayoutSplitPane1, setLayoutSplitPane2 } from "../reducer";
 
-import OriginalText from "./SourcelText";
+import Menu from "./Menu";
+import SourceText from "./SourceText";
 import TemplateText from "./TemplateText";
 import Table from "./Table";
 import TransformedText from "./TransformedText";
 
-const TextTransformer = styled.div`
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Editors = styled.div`
   flex-grow: 1;
   position: relative;
 
@@ -56,7 +62,7 @@ const TextTransformer = styled.div`
 
   .splitter-layout > .layout-splitter {
     flex: 0 0 auto;
-    width: 4px;
+    width: 5px;
     height: 100%;
     cursor: col-resize;
     background-color: transparent;
@@ -84,7 +90,7 @@ const TextTransformer = styled.div`
 
   .splitter-layout.splitter-layout-vertical > .layout-splitter {
     width: 100%;
-    height: 4px;
+    height: 5px;
     cursor: row-resize;
   }
 `;
@@ -96,34 +102,37 @@ export default () => {
   const splitLane2 = useSelector(selectLayoutSplitLane2);
 
   return (
-    <TextTransformer>
-      {isEditing && <OriginalText />}
-      {!isEditing && (
-        <SplitterLayout
-          percentage
-          primaryMinSize={25}
-          secondaryMinSize={25}
-          secondaryInitialSize={splitLane1}
-          onSecondaryPaneSizeChange={pct => {
-            dispatch(setLayoutSplitPane1(pct));
-          }}
-        >
+    <Main>
+      <Menu />
+      <Editors>
+        {isEditing && <SourceText />}
+        {!isEditing && (
           <SplitterLayout
-            vertical
             percentage
             primaryMinSize={25}
             secondaryMinSize={25}
-            secondaryInitialSize={splitLane2}
+            secondaryInitialSize={splitLane1}
             onSecondaryPaneSizeChange={pct => {
-              dispatch(setLayoutSplitPane2(pct));
+              dispatch(setLayoutSplitPane1(pct));
             }}
           >
-            <Table />
-            <TemplateText />
+            <SplitterLayout
+              vertical
+              percentage
+              primaryMinSize={25}
+              secondaryMinSize={25}
+              secondaryInitialSize={splitLane2}
+              onSecondaryPaneSizeChange={pct => {
+                dispatch(setLayoutSplitPane2(pct));
+              }}
+            >
+              <Table />
+              <TemplateText />
+            </SplitterLayout>
+            <TransformedText />
           </SplitterLayout>
-          <TransformedText />
-        </SplitterLayout>
-      )}
-    </TextTransformer>
+        )}
+      </Editors>
+    </Main>
   );
 };
