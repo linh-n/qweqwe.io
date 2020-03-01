@@ -1,16 +1,16 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { HotKeys, configure } from "react-hotkeys";
 
-import { setSourceText, setLayoutIsEditing } from "../../reducer";
+import Editor from "react-simple-code-editor";
+import { highlight, languages } from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+
+import { setSourceText } from "../../reducer";
 import { selectSourceText } from "../../selectors/inputs";
 
-configure({
-  ignoreEventsCondition: () => false,
-});
-
-const TextEditor = styled.textarea`
+const TextEditor = styled(Editor)`
   width: 100%;
   height: 100%;
   border: 0;
@@ -23,20 +23,11 @@ export default () => {
   const originalText = useSelector(selectSourceText);
   const dispatch = useDispatch();
 
-  const keyMap = {
-    ctrl_s: "ctrl+s",
-  };
-
-  const handlers = {
-    ctrl_s: useCallback(event => {
-      event.preventDefault();
-      dispatch(setLayoutIsEditing(false));
-    }, []),
-  };
-
   return (
-    <HotKeys keyMap={keyMap} handlers={handlers} style={{ width: "100%", height: "100%" }}>
-      <TextEditor value={originalText} onChange={e => dispatch(setSourceText(e.target.value))} />
-    </HotKeys>
+    <TextEditor
+      value={originalText}
+      onValueChange={text => dispatch(setSourceText(text))}
+      highlight={text => highlight(text, languages.js)}
+    />
   );
 };

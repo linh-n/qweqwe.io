@@ -1,9 +1,8 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { selectTableRowsForPreview } from "../../selectors/rows";
-import { setLayoutIsEditing } from "../../reducer";
 
 const Table = styled.table`
   color: #fff;
@@ -37,10 +36,9 @@ const Table = styled.table`
 
 export default () => {
   const tableRows = useSelector(selectTableRowsForPreview);
-  const dispatch = useDispatch();
 
   return (
-    <Table onClick={() => dispatch(setLayoutIsEditing(true))}>
+    <Table>
       {tableRows.length > 0 && (
         <thead>
           <tr>

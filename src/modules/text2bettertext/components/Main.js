@@ -6,6 +6,7 @@ import {
   selectIsEditingSourceText,
   selectLayoutSplitLane1,
   selectLayoutSplitLane2,
+  selectCurrentLayout,
 } from "../selectors/layout";
 import { setLayoutSplitPane1, setLayoutSplitPane2 } from "../reducer";
 
@@ -97,6 +98,7 @@ const Editors = styled.div`
 
 export default () => {
   const dispatch = useDispatch();
+  const currentLayout = useSelector(selectCurrentLayout);
   const isEditing = useSelector(selectIsEditingSourceText);
   const splitLane1 = useSelector(selectLayoutSplitLane1);
   const splitLane2 = useSelector(selectLayoutSplitLane2);
@@ -107,30 +109,112 @@ export default () => {
       <Editors>
         {isEditing && <SourceText />}
         {!isEditing && (
-          <SplitterLayout
-            percentage
-            primaryMinSize={25}
-            secondaryMinSize={25}
-            secondaryInitialSize={splitLane1}
-            onSecondaryPaneSizeChange={pct => {
-              dispatch(setLayoutSplitPane1(pct));
-            }}
-          >
-            <SplitterLayout
-              vertical
-              percentage
-              primaryMinSize={25}
-              secondaryMinSize={25}
-              secondaryInitialSize={splitLane2}
-              onSecondaryPaneSizeChange={pct => {
-                dispatch(setLayoutSplitPane2(pct));
-              }}
-            >
-              <Table />
-              <TemplateText />
-            </SplitterLayout>
-            <TransformedText />
-          </SplitterLayout>
+          <>
+            {currentLayout === "⫞" && (
+              <SplitterLayout
+                percentage
+                primaryMinSize={25}
+                secondaryMinSize={25}
+                secondaryInitialSize={splitLane1}
+                onSecondaryPaneSizeChange={pct => {
+                  dispatch(setLayoutSplitPane1(pct));
+                }}
+              >
+                <SplitterLayout
+                  vertical
+                  percentage
+                  primaryMinSize={25}
+                  secondaryMinSize={25}
+                  secondaryInitialSize={splitLane2}
+                  onSecondaryPaneSizeChange={pct => {
+                    dispatch(setLayoutSplitPane2(pct));
+                  }}
+                >
+                  <Table />
+                  <TemplateText />
+                </SplitterLayout>
+                <TransformedText />
+              </SplitterLayout>
+            )}
+            {currentLayout === "⫟" && (
+              <SplitterLayout
+                percentage
+                vertical
+                primaryMinSize={25}
+                secondaryMinSize={25}
+                secondaryInitialSize={splitLane2}
+                onSecondaryPaneSizeChange={pct => {
+                  dispatch(setLayoutSplitPane2(pct));
+                }}
+              >
+                <Table />
+                <SplitterLayout
+                  percentage
+                  primaryMinSize={25}
+                  secondaryMinSize={25}
+                  secondaryInitialSize={splitLane1}
+                  onSecondaryPaneSizeChange={pct => {
+                    dispatch(setLayoutSplitPane1(pct));
+                  }}
+                >
+                  <TemplateText />
+                  <TransformedText />
+                </SplitterLayout>
+              </SplitterLayout>
+            )}
+            {currentLayout === "=" && (
+              <SplitterLayout
+                percentage
+                vertical
+                primaryMinSize={15}
+                secondaryMinSize={35}
+                secondaryInitialSize={splitLane2}
+                onSecondaryPaneSizeChange={pct => {
+                  dispatch(setLayoutSplitPane2(pct));
+                }}
+              >
+                <Table />
+                <SplitterLayout
+                  percentage
+                  vertical
+                  primaryMinSize={25}
+                  secondaryMinSize={25}
+                  secondaryInitialSize={splitLane1}
+                  onSecondaryPaneSizeChange={pct => {
+                    dispatch(setLayoutSplitPane1(pct));
+                  }}
+                >
+                  <TemplateText />
+                  <TransformedText />
+                </SplitterLayout>
+              </SplitterLayout>
+            )}
+            {currentLayout === "∥" && (
+              <SplitterLayout
+                percentage
+                primaryMinSize={15}
+                secondaryMinSize={35}
+                secondaryInitialSize={splitLane1}
+                onSecondaryPaneSizeChange={pct => {
+                  dispatch(setLayoutSplitPane1(pct));
+                }}
+              >
+                <Table />
+                <SplitterLayout
+                  percentage
+                  primaryMinSize={25}
+                  secondaryMinSize={25}
+                  secondaryInitialSize={splitLane2}
+                  onSecondaryPaneSizeChange={pct => {
+                    dispatch(setLayoutSplitPane2(pct));
+                  }}
+                >
+                  <TemplateText />
+                  <TransformedText />
+                </SplitterLayout>
+              </SplitterLayout>
+            )}
+          </>
         )}
       </Editors>
     </Main>
