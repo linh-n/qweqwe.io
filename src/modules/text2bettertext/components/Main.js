@@ -2,12 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import SplitterLayout from "react-splitter-layout";
-import {
-  selectIsEditingSourceText,
-  selectLayoutSplitLane1,
-  selectLayoutSplitLane2,
-  selectCurrentLayout,
-} from "../selectors/layout";
+import { selectLayoutSplitLane1, selectLayoutSplitLane2, selectCurrentLayout } from "../selectors/layout";
 import { setLayoutSplitPane1, setLayoutSplitPane2 } from "../reducer";
 
 import StatusBar from "./StatusBar";
@@ -100,7 +95,6 @@ const Editors = styled.div`
 export default () => {
   const dispatch = useDispatch();
   const currentLayout = useSelector(selectCurrentLayout);
-  const isEditing = useSelector(selectIsEditingSourceText);
   const splitLane1 = useSelector(selectLayoutSplitLane1);
   const splitLane2 = useSelector(selectLayoutSplitLane2);
 
