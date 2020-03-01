@@ -1,33 +1,18 @@
 import React from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-
-import { setSourceText } from "../../reducer";
+import { useSelector } from "react-redux";
+import { selectIsEditingSourceText } from "../../selectors/layout";
 import { selectSourceText } from "../../selectors/inputs";
 
-const TextEditor = styled(Editor)`
-  width: 100%;
-  height: 100%;
-  border: 0;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.6);
-  resize: none;
-`;
+import Input from "./Input";
+import Table from "./Table";
 
 export default () => {
-  const originalText = useSelector(selectSourceText);
-  const dispatch = useDispatch();
+  const isEditing = useSelector(selectIsEditingSourceText);
+  const sourceText = useSelector(selectSourceText);
 
-  return (
-    <TextEditor
-      value={originalText}
-      onValueChange={text => dispatch(setSourceText(text))}
-      highlight={text => highlight(text, languages.js)}
-    />
-  );
+  if (isEditing || sourceText.length === 0) {
+    return <Input />;
+  } else {
+    return <Table />;
+  }
 };

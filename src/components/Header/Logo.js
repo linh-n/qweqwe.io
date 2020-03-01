@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useTransition, animated } from "react-spring";
 import { selectCurrentLanguage } from "modules/ui/selectors";
 
 const Logo = styled(NavLink)`
@@ -18,14 +17,8 @@ const Logo = styled(NavLink)`
 
 export default () => {
   const ref = useRef([]);
-  const [items, set] = useState([]);
+  const [items, setItems] = useState([]);
   const language = useSelector(selectCurrentLanguage);
-
-  const transitions = useTransition(items, item => item.key, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
 
   const startAnimation = useCallback(() => {
     const animationSteps =
@@ -65,13 +58,13 @@ export default () => {
 
     ref.current.map(clearTimeout);
     ref.current = [];
-    set([{ key: " ", value: " " }]);
+    setItems([{ key: " ", value: " " }]);
 
     animationSteps.forEach(step => {
       const chars = step.text.split("");
       const charArrayAggr = chars.map((c, i) => ({ key: c + i, value: c }));
 
-      ref.current.push(setTimeout(() => set(charArrayAggr), step.delay));
+      ref.current.push(setTimeout(() => setItems(charArrayAggr), step.delay));
     });
   }, []);
 
@@ -85,10 +78,8 @@ export default () => {
 
   return (
     <Logo to={`/${language}`}>
-      {transitions.map(({ item, props, key }) => (
-        <animated.span className="transitions-item" key={key} style={props}>
-          {item.value}
-        </animated.span>
+      {items.map(i => (
+        <span key={i.key}>{i.value}</span>
       ))}
     </Logo>
   );

@@ -5,14 +5,14 @@ export default styled.button`
   background: ${props =>
     props.primary ? "rgba(50, 105, 90, 1)" : props.active ? "#000" : "rgba(0, 0, 0, .5)"};
   color: #fff;
-  padding: 5px 20px;
+  padding: 5px 15px;
   cursor: pointer;
-
-  &:focus {
-    outline: 0;
-  }
 
   &:hover {
     opacity: 0.9;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
   }
 `;

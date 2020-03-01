@@ -25,7 +25,7 @@ store.dispatch(setMessages(messages));
 
 WebFont.load({
   google: {
-    families: ["Ubuntu+Mono:400,400i,700:latin-ext"],
+    families: ["Nunito:600,900:latin-ext", "Ubuntu+Mono:400,700:latin-ext"],
   },
 });
 

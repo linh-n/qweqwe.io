@@ -1,14 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { selectTableRowsForPreview } from "../../selectors/rows";
+import { setLayoutIsEditing } from "../../reducer";
+import { selectTableRows } from "../../selectors/rows";
 
 const Table = styled.table`
   color: #fff;
   border-spacing: 0;
   width: 100%;
   height: 100%;
+  cursor: text;
+  font-family: "Ubuntu Mono";
 
   thead {
     text-align: left;
@@ -35,10 +38,11 @@ const Table = styled.table`
 `;
 
 export default () => {
-  const tableRows = useSelector(selectTableRowsForPreview);
+  const dispatch = useDispatch();
+  const tableRows = useSelector(selectTableRows);
 
   return (
-    <Table>
+    <Table onClick={() => dispatch(setLayoutIsEditing(true))}>
       {tableRows.length > 0 && (
         <thead>
           <tr>
