@@ -21,7 +21,6 @@ module.exports = merge(baseConfig, {
     new WorkboxPlugin.InjectManifest({
       swSrc: path.resolve(__dirname, "public/service-worker.js"),
       swDest: "sw.js",
-      exclude: [/\.gz$/],
     }),
     new CompressionPlugin({
       filename: "[path].gz[query]",
