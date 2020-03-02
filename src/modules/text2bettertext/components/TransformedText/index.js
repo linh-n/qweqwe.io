@@ -12,7 +12,7 @@ const Transformed = styled.div`
     margin: 0;
     padding: 15px ${props => props.theme.containerPadding}px;
     color: #fff;
-    font-family: ${props => props.theme.fontFamily};
+    font-family: "Ubuntu Mono";
   }
 `;
 
