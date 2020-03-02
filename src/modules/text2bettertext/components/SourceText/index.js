@@ -1,16 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectIsEditingSourceText } from "../../selectors/layout";
-import { selectSourceText } from "../../selectors/inputs";
+import { selectShouldShowSourceInput } from "../../selectors/layout";
 
 import Input from "./Input";
 import Table from "./Table";
 
 export default () => {
-  const isEditing = useSelector(selectIsEditingSourceText);
-  const sourceText = useSelector(selectSourceText);
+  const shouldEdit = useSelector(selectShouldShowSourceInput);
 
-  if (isEditing || sourceText.length === 0) {
+  if (shouldEdit) {
     return <Input />;
   } else {
     return <Table />;

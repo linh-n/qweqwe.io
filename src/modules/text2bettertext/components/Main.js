@@ -161,25 +161,25 @@ export default () => {
             vertical
             primaryMinSize={15}
             secondaryMinSize={35}
-            secondaryInitialSize={splitLane2}
+            secondaryInitialSize={splitLane1}
             onSecondaryPaneSizeChange={pct => {
-              dispatch(setLayoutSplitPane2(pct));
+              dispatch(setLayoutSplitPane1(pct));
             }}
           >
-            <SourceText />
             <SplitterLayout
               percentage
               vertical
               primaryMinSize={25}
               secondaryMinSize={25}
-              secondaryInitialSize={splitLane1}
+              secondaryInitialSize={splitLane2}
               onSecondaryPaneSizeChange={pct => {
-                dispatch(setLayoutSplitPane1(pct));
+                dispatch(setLayoutSplitPane2(pct));
               }}
             >
+              <SourceText />
               <TemplateText />
-              <TransformedText />
             </SplitterLayout>
+            <TransformedText />
           </SplitterLayout>
         )}
         {currentLayout === "∥" && (
@@ -192,7 +192,6 @@ export default () => {
               dispatch(setLayoutSplitPane1(pct));
             }}
           >
-            <SourceText />
             <SplitterLayout
               percentage
               primaryMinSize={25}
@@ -202,9 +201,10 @@ export default () => {
                 dispatch(setLayoutSplitPane2(pct));
               }}
             >
+              <SourceText />
               <TemplateText />
-              <TransformedText />
             </SplitterLayout>
+            <TransformedText />
           </SplitterLayout>
         )}
       </Editors>

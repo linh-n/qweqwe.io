@@ -13,7 +13,7 @@ const defaultState = {
   templateText: "",
   layout: {
     currentLayout: "⫞",
-    isEditing: true,
+    isEditing: false,
     splitPaneVertical: 50,
     splitPaneHorizontal: 50,
   },

@@ -52,28 +52,31 @@ export default () => {
   return (
     <Table onClick={() => dispatch(setLayoutIsEditing(true))}>
       {tableRows.length > 0 && (
-        <thead>
-          <tr>
-            {tableRows[0].cells.map(cell => (
-              <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
+        <>
+          <thead>
+            <tr>
+              {tableRows[0].cells.map(cell => (
+                <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {tableRows.map(row => (
+              <tr key={`row-${row.index}`}>
+                {row.cells.map(cell => (
+                  <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
+                ))}
+              </tr>
             ))}
-          </tr>
-        </thead>
+            <tr className="filler">
+              {tableRows[0].cells.map(cell => (
+                <td key={`td-filler-${cell.index}`}>&nbsp;</td>
+              ))}
+            </tr>
+          </tbody>
+        </>
       )}
-      <tbody>
-        {tableRows.map(row => (
-          <tr key={`row-${row.index}`}>
-            {row.cells.map(cell => (
-              <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
-            ))}
-          </tr>
-        ))}
-        <tr className="filler">
-          {tableRows[0].cells.map(cell => (
-            <td key={`td-filler-${cell.index}`}>&nbsp;</td>
-          ))}
-        </tr>
-      </tbody>
     </Table>
   );
 };

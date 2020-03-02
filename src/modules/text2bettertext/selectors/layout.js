@@ -1,8 +1,10 @@
 import { createSelector } from "reselect";
 
-const getState = state => state.text2bettertext;
-
-export const selectCurrentLayout = createSelector(getState, state => state?.layout?.currentLayout ?? "⫞");
-export const selectIsEditingSourceText = createSelector(getState, state => state?.layout?.isEditing ?? true);
-export const selectLayoutSplitLane1 = createSelector(getState, state => state?.layout?.splitPane1 ?? 50);
-export const selectLayoutSplitLane2 = createSelector(getState, state => state?.layout?.splitPane2 ?? 50);
+export const selectCurrentLayout = state => state.text2bettertext.layout.currentLayout;
+export const selectShouldShowSourceInput = createSelector(
+  state => state.text2bettertext.layout.isEditing,
+  state => state.text2bettertext.sourceText,
+  (isEditing, sourceText) => isEditing || sourceText.length === 0
+);
+export const selectLayoutSplitLane1 = state => state.text2bettertext.layout.splitPane1;
+export const selectLayoutSplitLane2 = state => state.text2bettertext.layout.splitPane2;

@@ -9,7 +9,6 @@ import "prismjs/components/prism-javascript";
 
 import { setSourceText, setLayoutIsEditing } from "../../reducer";
 import { selectSourceText } from "../../selectors/inputs";
-import Button from "shared-components/Button";
 
 const EditorContainer = styled.div`
   height: 100%;
@@ -35,33 +34,29 @@ const EditorContainer = styled.div`
   }
 `;
 
-const ButtonFloat = styled(Button)`
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-`;
-
 export default () => {
   const sourceText = useSelector(selectSourceText);
   const dispatch = useDispatch();
+
+  const onFocus = () => dispatch(setLayoutIsEditing(true));
+  const onBlur = () => dispatch(setLayoutIsEditing(false));
+  const onValueChange = text => dispatch(setSourceText(text));
+  const highlightFn = text => highlight(text, languages.js);
 
   return (
     <EditorContainer>
       <Editor
         autoFocus
+        onFocus={onFocus}
+        onBlur={onBlur}
         padding={20}
         style={{
           minHeight: "100%",
         }}
         value={sourceText}
-        onValueChange={text => dispatch(setSourceText(text))}
-        highlight={text => highlight(text, languages.js)}
+        onValueChange={onValueChange}
+        highlight={highlightFn}
       />
-      {sourceText.length > 0 && (
-        <ButtonFloat primary onClick={() => dispatch(setLayoutIsEditing(false))}>
-          done
-        </ButtonFloat>
-      )}
     </EditorContainer>
   );
 };
