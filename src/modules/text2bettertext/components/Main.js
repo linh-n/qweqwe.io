@@ -20,7 +20,7 @@ const Main = styled.div`
 const Editors = styled.div`
   flex-grow: 1;
   position: relative;
-  border-radius: 25px;
+  border-radius: 0 25px 25px 25px;
   overflow: hidden;
 
   .splitter-layout {

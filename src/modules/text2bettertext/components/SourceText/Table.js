@@ -8,7 +8,7 @@ import { selectTableRows } from "../../selectors/rows";
 const Table = styled.table`
   color: #fff;
   border-spacing: 0;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   cursor: text;
   font-family: "Ubuntu Mono";
