@@ -1,5 +1,5 @@
 FROM node:alpine as build
-WORKDIR /tmp/qweqwe.io
+WORKDIR /app/qweqwe.io
 COPY . .
 RUN npm ci --silent
 RUN npm run publish
