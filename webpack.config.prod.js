@@ -22,7 +22,7 @@ module.exports = merge(config, {
     new WorkboxPlugin.InjectManifest({
       swSrc: path.resolve(__dirname, "public/service-worker.js"),
       swDest: "sw.js",
-      exclude: ["web.config", ".htaccess"],
+      exclude: ["web.config", ".htaccess", "*.gz"],
     }),
     new CompressionPlugin({
       filename: "[path].gz[query]",
