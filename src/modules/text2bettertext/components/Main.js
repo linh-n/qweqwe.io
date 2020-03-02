@@ -20,6 +20,8 @@ const Main = styled.div`
 const Editors = styled.div`
   flex-grow: 1;
   position: relative;
+  border-radius: 25px;
+  overflow: hidden;
 
   .splitter-layout {
     position: absolute;
@@ -37,7 +39,7 @@ const Editors = styled.div`
     flex-direction: column;
     overflow: auto;
 
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.15);
     scrollbar-width: thin;
 
     &::-webkit-scrollbar {
@@ -45,11 +47,11 @@ const Editors = styled.div`
     }
 
     &::-webkit-scrollbar-track {
-      background: transparent;
+      background: rgba(0, 0, 0, 0.15);
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -59,7 +61,7 @@ const Editors = styled.div`
 
   .splitter-layout > .layout-splitter {
     flex: 0 0 auto;
-    width: 5px;
+    width: 10px;
     height: 100%;
     cursor: col-resize;
     background-color: transparent;
@@ -87,7 +89,7 @@ const Editors = styled.div`
 
   .splitter-layout.splitter-layout-vertical > .layout-splitter {
     width: 100%;
-    height: 5px;
+    height: 10px;
     cursor: row-resize;
   }
 `;

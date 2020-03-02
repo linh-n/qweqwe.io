@@ -14,8 +14,6 @@ import { selectIsEditingSourceText } from "../../selectors/layout";
 const EditorContainer = styled.div`
   height: 100%;
   background: rgba(255, 255, 255, 0.6);
-  scrollbar-color: rgba(0, 0, 0, 0.35) transparent;
-  scrollbar-width: thin;
   overflow: auto;
   resize: none;
   font-family: "Ubuntu Mono";
@@ -25,16 +23,19 @@ const EditorContainer = styled.div`
     background: rgba(255, 255, 255, 0.25);
   }
 
+  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.15);
+  scrollbar-width: thin;
+
   &::-webkit-scrollbar {
     width: 7.5px;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.15);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.5);
   }
 `;
 

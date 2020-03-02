@@ -12,6 +12,7 @@ const Table = styled.table`
   height: 100%;
   cursor: text;
   font-family: "Ubuntu Mono";
+  table-layout: fixed;
 
   thead {
     text-align: left;
@@ -25,6 +26,13 @@ const Table = styled.table`
   th {
     padding-top: 15px;
     padding-bottom: 15px;
+  }
+
+  tr {
+    height: 1px;
+  }
+  tr.filler {
+    height: auto;
   }
 
   th:nth-child(odd),
@@ -60,6 +68,11 @@ export default () => {
             ))}
           </tr>
         ))}
+        <tr className="filler">
+          {tableRows[0].cells.map(cell => (
+            <td key={`td-filler-${cell.index}`}>&nbsp;</td>
+          ))}
+        </tr>
       </tbody>
     </Table>
   );

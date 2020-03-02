@@ -19,7 +19,7 @@ const EditorContainer = styled.div`
   font-family: "Ubuntu Mono";
   position: relative;
 
-  scrollbar-color: rgba(0, 0, 0, 0.4) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.15);
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -27,11 +27,11 @@ const EditorContainer = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.15);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.5);
   }
 `;
 
