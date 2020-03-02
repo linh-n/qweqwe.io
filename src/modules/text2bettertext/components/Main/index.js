@@ -2,13 +2,15 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import SplitterLayout from "react-splitter-layout";
-import { selectLayoutSplitLane1, selectLayoutSplitLane2, selectCurrentLayout } from "../selectors/layout";
-import { setLayoutSplitPane1, setLayoutSplitPane2 } from "../reducer";
+import { selectLayoutSplitLane1, selectLayoutSplitLane2, selectCurrentLayout } from "../../selectors/layout";
+import { setLayoutSplitPane1, setLayoutSplitPane2 } from "../../reducer";
 
-import StatusBar from "./StatusBar";
-import SourceText from "./SourceText";
-import TemplateText from "./TemplateText";
-import TransformedText from "./TransformedText";
+import StatusBar from "../StatusBar";
+import SourceText from "../SourceText";
+import TemplateText from "../TemplateText";
+import TransformedText from "../TransformedText";
+
+import "./splitter.css";
 
 const Main = styled.div`
   display: flex;
@@ -22,76 +24,6 @@ const Editors = styled.div`
   position: relative;
   border-radius: 0 25px 25px 25px;
   overflow: hidden;
-
-  .splitter-layout {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .splitter-layout .layout-pane {
-    position: relative;
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-
-    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.15);
-    scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-      width: 7.5px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.15);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  .splitter-layout .layout-pane.layout-pane-primary {
-    flex: 1 1 auto;
-  }
-
-  .splitter-layout > .layout-splitter {
-    flex: 0 0 auto;
-    width: 10px;
-    height: 100%;
-    cursor: col-resize;
-    background-color: transparent;
-  }
-
-  .splitter-layout .layout-splitter:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .splitter-layout.layout-changing {
-    cursor: col-resize;
-  }
-
-  .splitter-layout.layout-changing > .layout-splitter {
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-
-  .splitter-layout.splitter-layout-vertical {
-    flex-direction: column;
-  }
-
-  .splitter-layout.splitter-layout-vertical.layout-changing {
-    cursor: row-resize;
-  }
-
-  .splitter-layout.splitter-layout-vertical > .layout-splitter {
-    width: 100%;
-    height: 10px;
-    cursor: row-resize;
-  }
 `;
 
 export default () => {
