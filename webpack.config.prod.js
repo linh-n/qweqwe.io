@@ -1,20 +1,27 @@
 const path = require("path");
 const webpack = require("webpack");
-const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
-const baseConfig = require("./webpack.config.js");
-
-module.exports = merge(baseConfig, {
+module.exports = {
   mode: "production",
+  entry: {
+    main: ["./src/index.js"],
+  },
   output: {
     path: path.resolve(__dirname, "publish"),
     publicPath: "/",
     filename: "app/[name].js",
   },
+  devServer: {
+    contentBase: path.resolve(__dirname, "publish"),
+    historyApiFallback: {
+      index: "index.html",
+    },
+  },
   plugins: [
+    new webpack.LoaderOptionsPlugin({ options: {} }),
     new HtmlWebpackPlugin({
       template: `./public/template.prod.html`,
     }),
@@ -30,8 +37,50 @@ module.exports = merge(baseConfig, {
       minRatio: 0.8,
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        enforce: "pre",
+        loader: "eslint-loader",
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2|pdf)$/,
+        loader: "file-loader",
+        options: {
+          outputPath: "assets",
+          name: "[hash:8].[ext]",
+        },
+      },
+      {
+        test: /\.(config|ico)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]",
+        },
+      },
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto",
+      },
+    ],
+  },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
     modules: [path.resolve(__dirname, "src"), "node_modules"],
+    alias: {
+      "react-dom": "@hot-loader/react-dom",
+    },
   },
-});
+};

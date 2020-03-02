@@ -19,6 +19,7 @@ module.exports = {
     },
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({ options: {} }),
     new HtmlWebpackPlugin({
       template: `./public/template.html`,
     }),
@@ -56,34 +57,9 @@ module.exports = {
         },
       },
       {
-        test: /\.htaccess$/,
-        loader: "file-loader",
-        options: {
-          name: "[name]",
-        },
-      },
-      {
-        test: /\.(csv|tsv)$/,
-        loader: "file-loader",
-        options: {
-          outputPath: "data",
-          name: "[name].[ext]",
-        },
-      },
-      {
         test: /\.mjs$/,
         include: /node_modules/,
         type: "javascript/auto",
-      },
-      {
-        type: "javascript/auto",
-        test: /\.json$/,
-        exclude: /i18n/,
-        loader: "file-loader",
-        options: {
-          outputPath: "data",
-          name: "[name].[ext]",
-        },
       },
     ],
   },
