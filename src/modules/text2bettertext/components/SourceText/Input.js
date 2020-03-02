@@ -38,7 +38,6 @@ export default () => {
   const sourceText = useSelector(selectSourceText);
   const dispatch = useDispatch();
 
-  const onFocus = () => dispatch(setLayoutIsEditing(true));
   const onBlur = () => dispatch(setLayoutIsEditing(false));
   const onValueChange = text => dispatch(setSourceText(text));
   const highlightFn = text => highlight(text, languages.js);
@@ -53,7 +52,6 @@ export default () => {
         style={{
           minHeight: "100%",
         }}
-        onFocus={onFocus}
         onBlur={onBlur}
         value={sourceText}
         onValueChange={onValueChange}
