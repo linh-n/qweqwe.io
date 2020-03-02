@@ -15,14 +15,18 @@ export default (action$, state$) =>
         ReactGA.pageview(window.location.pathname + window.location.search);
       }
 
-      const languageInUrl = extractLanguageFromPathname(
+      const languageFromRequest = extractLanguageFromPathname(
         action.payload.location.pathname,
         state$.value.ui.availableLanguages
       );
       const currentLanguage = state$.value.ui.language;
 
-      if (!currentLanguage || currentLanguage !== languageInUrl) {
-        return of(setLanguage(languageInUrl));
+      if (
+        !currentLanguage ||
+        currentLanguage !== languageFromRequest ||
+        action.payload.location.pathname.split("/")[1].length === 0
+      ) {
+        return of(setLanguage(languageFromRequest));
       }
 
       return [];

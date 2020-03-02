@@ -10,8 +10,6 @@ export default () => {
   const isEditing = useSelector(selectIsEditingSourceText);
   const sourceText = useSelector(selectSourceText);
 
-  console.log(isEditing || sourceText.length === 0);
-
   if (isEditing || sourceText.length === 0) {
     return <Input />;
   } else {
