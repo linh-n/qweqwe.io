@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,16 +8,22 @@ import "prismjs/components/prism-json";
 import "prismjs/themes/prism-solarizedlight.css";
 
 import { setTemplateText } from "../../reducer";
-import { selectTemplateText } from "../../selectors/inputs";
+import { selectTemplateText, selectSourceText } from "../../selectors/inputs";
+import { selectIsEditingSourceText } from "../../selectors/layout";
 
 const EditorContainer = styled.div`
   height: 100%;
   background: rgba(255, 255, 255, 0.6);
-  scrollbar-color: rgba(0, 0, 0, 0.4) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.35) transparent;
   scrollbar-width: thin;
   overflow: auto;
   resize: none;
   font-family: "Ubuntu Mono";
+  transition: background-color 0.3s ease;
+
+  &.disabled {
+    background: rgba(255, 255, 255, 0.25);
+  }
 
   &::-webkit-scrollbar {
     width: 7.5px;
@@ -33,11 +39,19 @@ const EditorContainer = styled.div`
 `;
 
 export default () => {
-  const template = useSelector(selectTemplateText);
   const dispatch = useDispatch();
+  const template = useSelector(selectTemplateText);
+  const sourceText = useSelector(selectSourceText);
+  const isEditingSourceText = useSelector(selectIsEditingSourceText);
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    setIsDisabled(sourceText?.length === 0 || isEditingSourceText);
+  }, [sourceText, isEditingSourceText]);
 
   return (
-    <EditorContainer>
+    <EditorContainer className={isDisabled ? "disabled" : ""}>
       <Editor
         padding={20}
         style={{

@@ -9,7 +9,7 @@ export const setLayoutSplitPane1 = createAction("[Text transformer] Set layout s
 export const setLayoutSplitPane2 = createAction("[Text transformer] Set layout split pane 2");
 
 const defaultState = {
-  originalText: "",
+  sourceText: "",
   templateText: "",
   layout: {
     currentLayout: "⫞",
@@ -23,7 +23,7 @@ export default createReducer(
   { ...defaultState },
   {
     [setSourceText]: (state, action) => {
-      state.originalText = action.payload;
+      state.sourceText = action.payload;
     },
     [setTemplateText]: (state, action) => {
       state.templateText = action.payload;

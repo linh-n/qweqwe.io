@@ -11,7 +11,7 @@ const defaultTheme = {
   colorAccent: "#4CAF4F",
   colorHighlight: "#781a36",
   colorDisabled: "#666666",
-  fontFamily: "Ubuntu Mono",
+  fontFamily: "Nunito",
   fontSize: "18px",
   fontWeightNormal: 600,
   fontWeightBold: 900,

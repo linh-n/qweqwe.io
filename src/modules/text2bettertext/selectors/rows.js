@@ -2,10 +2,10 @@ import { createSelector } from "reselect";
 
 const PREVIEW_ROWS = 10;
 
-const getOriginalText = state => state.text2bettertext.originalText;
+const getSourceText = state => state.text2bettertext.sourceText;
 
-export const selectTableRows = createSelector(getOriginalText, originalText => {
-  const rows = originalText.match(/[^\r\n]+/g);
+export const selectTableRows = createSelector(getSourceText, sourceText => {
+  const rows = sourceText.match(/[^\r\n]+/g);
   return rows
     ? rows.map((row, rowIndex) => ({
         index: rowIndex,
