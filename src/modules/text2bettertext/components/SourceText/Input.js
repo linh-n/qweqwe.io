@@ -47,12 +47,14 @@ export default () => {
     <EditorContainer>
       <Editor
         autoFocus
-        onFocus={onFocus}
-        onBlur={onBlur}
+        insertSpaces={false}
+        tabSize={1}
         padding={20}
         style={{
           minHeight: "100%",
         }}
+        onFocus={onFocus}
+        onBlur={onBlur}
         value={sourceText}
         onValueChange={onValueChange}
         highlight={highlightFn}
