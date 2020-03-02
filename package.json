@@ -11,8 +11,8 @@
     "server": "node server/index.js",
     "start": "webpack-dev-server -d --colors --hot --config ./webpack.config.js --host localhost --port 1010",
     "clean": "del-cli dist/*",
-    "build": "webpack-cli --mode development --optimize-minimize --env.compress --env.analyze",
-    "publish": "webpack-cli --mode production --optimize-minimize --env.compress --env.publish-production",
+    "build": "webpack-cli",
+    "publish": "webpack-cli --config webpack.config.prod.js --optimize-minimize",
     "test": "set NODE_ENV=test&& cls && jest",
     "trans-export:modules": "react-intl-po json2pot translations/src/modules/**/*.json -c id -o translations/modules.pot",
     "trans-import:modules": "react-intl-po po2json translations/modules*.po -c id -m translations/src/modules/**/*.json -o src/i18n/"
@@ -87,6 +87,7 @@
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2",
     "workbox-webpack-plugin": "^5.0.0"
   }
 }

@@ -2,3 +2,5 @@ node_modules/
 webpack/
 testconfig/
 *.config.js
+*.dev.js
+*.prod.js
