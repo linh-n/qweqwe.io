@@ -9,6 +9,11 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = merge(config, {
   mode: "production",
+  output: {
+    path: path.resolve(__dirname, "publish"),
+    publicPath: "/",
+    filename: "app/[name].js",
+  },
   plugins: [
     new webpack.LoaderOptionsPlugin({ options: {} }),
     new HtmlWebpackPlugin({

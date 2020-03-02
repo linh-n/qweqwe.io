@@ -12,13 +12,9 @@
     "**/.DS_Store": true,
     "node_modules": true,
     "dist": true,
+    "publish": true,
     "coverage": true,
     "**/__snapshots__": true,
     "translations": true
-    // - PER PROJECT -
-    // "src/sites/africa": true,
-    // "src/sites/bhutan": true,
-    // "src/sites/qatar": true,
-    // "src/sites/global": true
   }
 }

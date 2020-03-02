@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
+  mode: "development",
   entry: {
     main: ["./src/index.js"],
   },
@@ -13,7 +14,6 @@ module.exports = {
     publicPath: "/",
     filename: "app/[name].js",
   },
-  mode: "development",
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
     historyApiFallback: {
