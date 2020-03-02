@@ -1,13 +1,13 @@
 const path = require("path");
-const merge = require("webpack-merge");
-const config = require("./webpack.config.js");
-
 const webpack = require("webpack");
+const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
-module.exports = merge(config, {
+const baseConfig = require("./webpack.config.js");
+
+module.exports = merge(baseConfig, {
   mode: "production",
   output: {
     path: path.resolve(__dirname, "publish"),
@@ -15,7 +15,6 @@ module.exports = merge(config, {
     filename: "app/[name].js",
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({ options: {} }),
     new HtmlWebpackPlugin({
       template: `./public/template.prod.html`,
     }),
@@ -32,4 +31,8 @@ module.exports = merge(config, {
       minRatio: 0.8,
     }),
   ],
+  resolve: {
+    extensions: ["*", ".js", ".jsx"],
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
+  },
 });

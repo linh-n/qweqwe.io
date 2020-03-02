@@ -11,7 +11,7 @@
     "server": "node server/index.js",
     "start": "webpack-dev-server -d --colors --hot --config ./webpack.config.js --host localhost --port 1010",
     "build": "webpack-cli",
-    "publish": "webpack-cli --config webpack.config.prod.js --optimize-minimize",
+    "publish": "webpack-cli --config webpack.config.prod.js",
     "test": "set NODE_ENV=test&& cls && jest",
     "trans-export:modules": "react-intl-po json2pot translations/src/**/*.json -c id -o translations/translations.pot",
     "trans-import:modules": "react-intl-po po2json translations/translations*.po -c id -m translations/src/**/*.json -o src/i18n/"
