@@ -2,6 +2,7 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 
 export const setSourceText = createAction("[Text transformer] Set original text");
 export const setTemplateText = createAction("[Text transformer] Set template text");
+export const addFunction = createAction("[Text transformer] Add function");
 
 export const setLayoutCurrent = createAction("[Text transformer] Set layout");
 export const setLayoutIsEditing = createAction("[Text transformer] Set layout isEditing state");
