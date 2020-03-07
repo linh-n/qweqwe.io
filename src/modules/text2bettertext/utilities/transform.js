@@ -13,7 +13,7 @@ export default ({ source, template }) => {
         return null;
       }
 
-      const escapedExpression = curr.expression.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&");
+      const escapedExpression = curr.expression.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
       const regex = new RegExp(escapedExpression, "g");
       return prev.replace(regex, sourceItem[curr.sourceProperty] || "");
     }, template);
