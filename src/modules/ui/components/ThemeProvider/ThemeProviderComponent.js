@@ -55,7 +55,9 @@ CustomThemeProvider.propTypes = {
 
 CustomThemeProvider.defaultProps = {
   children: null,
-  theme: {},
+  theme: {
+    mobileTheme: {},
+  },
 };
 
 export default CustomThemeProvider;

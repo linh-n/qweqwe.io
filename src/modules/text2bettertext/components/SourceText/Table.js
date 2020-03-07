@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { setLayoutIsEditing } from "../../reducer";
-import { selectTableRows } from "../../selectors/rows";
+import { selectSourceArray } from "../../selectors/source-array";
 
 const Table = styled.table`
   color: #fff;
@@ -45,33 +45,33 @@ const Table = styled.table`
   }
 `;
 
-export default () => {
+const SourceTable = () => {
   const dispatch = useDispatch();
-  const tableRows = useSelector(selectTableRows);
+  const sourceArray = useSelector(selectSourceArray);
 
   return (
     <Table onClick={() => dispatch(setLayoutIsEditing(true))}>
-      {tableRows.length > 0 && (
+      {sourceArray.length > 0 && (
         <>
           <thead>
             <tr>
-              {tableRows[0].cells.map(cell => (
-                <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
+              {Object.keys(sourceArray[0]).map(key => (
+                <th key={`th-${key}`}>{`{${key}}`}</th>
               ))}
             </tr>
           </thead>
 
           <tbody>
-            {tableRows.map(row => (
-              <tr key={`row-${row.index}`}>
-                {row.cells.map(cell => (
-                  <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
+            {sourceArray.map(item => (
+              <tr key={`row-${item.index}`}>
+                {Object.entries(item).map(([key, value]) => (
+                  <td key={`row-${item.index}-col-${key}`}>{value}</td>
                 ))}
               </tr>
             ))}
             <tr className="filler">
-              {tableRows[0].cells.map(cell => (
-                <td key={`td-filler-${cell.index}`}>&nbsp;</td>
+              {Object.keys(sourceArray[0]).map(key => (
+                <th key={`td-filler-${key}`}>&nbsp;</th>
               ))}
             </tr>
           </tbody>
@@ -80,3 +80,5 @@ export default () => {
     </Table>
   );
 };
+
+export default SourceTable;

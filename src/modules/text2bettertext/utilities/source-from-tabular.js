@@ -4,13 +4,13 @@ export default sourceText => {
   }
 
   const rows = sourceText.match(/[^\r\n]+/g);
-  const output = rows.map(row =>
+  const output = rows.map((row, rowIndex) =>
     row.split(/\t/).reduce(
       (prev, curr, indx) => ({
         ...prev,
         [indx + 1]: curr,
       }),
-      {}
+      { index: rowIndex }
     )
   );
 

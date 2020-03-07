@@ -9,13 +9,13 @@ export default ({ source, template }) => {
 
   const transformItem = sourceItem =>
     templateParameters.reduce((prev, curr) => {
-      if (prev === null || (curr.isRequired && !sourceItem[curr.sourceProperty])) {
+      if (prev === null || (curr.isRequired && !sourceItem[curr.sourceKey])) {
         return null;
       }
 
       const escapedExpression = curr.expression.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
       const regex = new RegExp(escapedExpression, "g");
-      return prev.replace(regex, sourceItem[curr.sourceProperty] || "");
+      return prev.replace(regex, sourceItem[curr.sourceKey] || "");
     }, template);
 
   return source.map(transformItem).filter(item => !!item);

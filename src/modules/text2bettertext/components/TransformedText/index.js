@@ -20,7 +20,7 @@ export default () => {
   const transformedText = useSelector(selectTransformedText);
   return (
     <Transformed>
-      <pre>{transformedText.map(l => l.value).join("\n")}</pre>
+      <pre>{transformedText.join("\n")}</pre>
     </Transformed>
   );
 };

@@ -3,12 +3,12 @@ export default templateText => {
     return [];
   }
 
-  let matches = templateText.matchAll(/{(\d+)(!)?(:[a-z0-9|]*)?}/g);
+  let matches = templateText.matchAll(/{([a-zA-Z0-9_]+)(!)?(:[a-zA-Z0-9_|]*)?}/g);
   let cellsInTemplate = [];
   for (const match of matches) {
     cellsInTemplate.push({
       expression: match[0],
-      sourceProperty: match[1],
+      sourceKey: match[1],
       isRequired: !!match[2],
       functions: match[3] ? match[3].substr(1).split("|") : [],
     });

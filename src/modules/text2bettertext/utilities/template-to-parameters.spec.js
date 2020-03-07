@@ -29,9 +29,15 @@ describe("[Utility] Template to parameters converter", () => {
     const templateText = "{2} = true";
     const firstResult = templateToParameters(templateText)[0];
     expect(firstResult).toHaveProperty("expression");
-    expect(firstResult).toHaveProperty("sourceProperty");
+    expect(firstResult).toHaveProperty("sourceKey");
     expect(firstResult).toHaveProperty("isRequired");
     expect(firstResult).toHaveProperty("functions");
+  });
+
+  it("should process expressions of number and string", () => {
+    const templateText = "{2} = {key}";
+    const results = templateToParameters(templateText);
+    expect(results).toHaveLength(2);
   });
 
   it("should process required item", () => {
@@ -52,7 +58,7 @@ describe("[Utility] Template to parameters converter", () => {
     const templateText = "{2} = true";
     const firstResult = templateToParameters(templateText)[0];
     expect(firstResult.expression).toBe("{2}");
-    expect(firstResult.sourceProperty).toBe("2");
+    expect(firstResult.sourceKey).toBe("2");
     expect(firstResult.isRequired).toBe(false);
     expect(firstResult.functions).toHaveLength(0);
   });
@@ -61,7 +67,7 @@ describe("[Utility] Template to parameters converter", () => {
     const templateText = "{2!:func1|func2} = true";
     const firstResult = templateToParameters(templateText)[0];
     expect(firstResult.expression).toBe("{2!:func1|func2}");
-    expect(firstResult.sourceProperty).toBe("2");
+    expect(firstResult.sourceKey).toBe("2");
     expect(firstResult.isRequired).toBe(true);
     expect(firstResult.functions).toContain("func2");
   });
