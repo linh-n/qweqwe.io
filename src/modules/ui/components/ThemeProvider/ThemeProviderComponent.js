@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
-import useResizeAware from "react-resize-aware";
 
 const defaultTheme = {
   containerWidth: 1100,
@@ -22,31 +21,18 @@ const defaultTheme = {
   },
 };
 
-const CustomThemeProvider = ({ children, theme }) => {
-  const [resizeListener, size] = useResizeAware();
-  return (
-    <div style={{ position: "relative" }}>
-      {resizeListener}
-      <ThemeProvider
-        theme={
-          size.width > 800
-            ? {
-                ...defaultTheme,
-                ...theme,
-              }
-            : {
-                ...defaultTheme,
-                ...theme,
-                ...defaultTheme.mobileTheme,
-                ...theme.mobileTheme,
-              }
-        }
-      >
-        {children}
-      </ThemeProvider>
-    </div>
-  );
-};
+const CustomThemeProvider = ({ children, theme }) => (
+  <div style={{ position: "relative" }}>
+    <ThemeProvider
+      theme={{
+        ...defaultTheme,
+        ...theme,
+      }}
+    >
+      {children}
+    </ThemeProvider>
+  </div>
+);
 
 CustomThemeProvider.propTypes = {
   children: PropTypes.node,
