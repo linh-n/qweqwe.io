@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { selectTransformedText } from "../../selectors/transform";
 
-const Transformed = styled.div`
+const TransformedStyled = styled.div`
   background: rgba(0, 0, 0, 0.15);
   flex: 1 1 auto;
 
@@ -16,11 +16,13 @@ const Transformed = styled.div`
   }
 `;
 
-export default () => {
+const TransformedText = () => {
   const transformedText = useSelector(selectTransformedText);
   return (
-    <Transformed>
+    <TransformedStyled>
       <pre>{transformedText.map(l => l.value).join("\n")}</pre>
-    </Transformed>
+    </TransformedStyled>
   );
 };
+
+export default TransformedText;

@@ -26,7 +26,7 @@ const Editors = styled.div`
   overflow: hidden;
 `;
 
-export default () => {
+const Text2BetterText = () => {
   const dispatch = useDispatch();
   const currentLayout = useSelector(selectCurrentLayout);
   const splitLane1 = useSelector(selectLayoutSplitLane1);
@@ -144,3 +144,5 @@ export default () => {
     </Main>
   );
 };
+
+export default React.memo(Text2BetterText);

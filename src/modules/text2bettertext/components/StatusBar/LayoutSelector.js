@@ -7,7 +7,7 @@ import { selectCurrentLayout } from "../../selectors/layout";
 
 import Button from "shared-components/Button";
 
-const LayoutSelector = styled.div`
+const LayoutSelectorStyled = styled.div`
   display: flex;
   align-items: center;
 
@@ -22,12 +22,12 @@ const LayoutSelector = styled.div`
   }
 `;
 
-export default () => {
+const LayoutSelector = () => {
   const dispatch = useDispatch();
   const currentLayout = useSelector(selectCurrentLayout);
 
   return (
-    <LayoutSelector>
+    <LayoutSelectorStyled>
       <span>layout&nbsp;&nbsp;</span>
       <div className="btns">
         {["⫞", "⫟", "=", "∥"].map(layout => (
@@ -45,6 +45,10 @@ export default () => {
           </Button>
         ))}
       </div>
-    </LayoutSelector>
+    </LayoutSelectorStyled>
   );
 };
+
+LayoutSelector.whyDidYouRender = true;
+
+export default LayoutSelector;

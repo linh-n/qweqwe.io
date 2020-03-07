@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-json";
+import "prismjs/themes/prism-solarizedlight.css";
 
-import { setSourceText, setLayoutIsEditing } from "../../reducer";
-import { selectSourceText } from "../../selectors/inputs";
+import { setTemplateText } from "../../reducer";
+import { selectTemplateText } from "../../selectors/inputs";
+import { selectShouldShowSourceInput } from "../../selectors/layout";
 
 const EditorContainer = styled.div`
   height: 100%;
@@ -16,7 +17,11 @@ const EditorContainer = styled.div`
   overflow: auto;
   resize: none;
   font-family: "Ubuntu Mono";
-  position: relative;
+  transition: background-color 0.3s ease;
+
+  &.faded {
+    background: rgba(255, 255, 255, 0.45);
+  }
 
   scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.15);
   scrollbar-width: thin;
@@ -34,29 +39,26 @@ const EditorContainer = styled.div`
   }
 `;
 
-export default () => {
-  const sourceText = useSelector(selectSourceText);
+const TemplateInput = () => {
   const dispatch = useDispatch();
-
-  const onBlur = () => dispatch(setLayoutIsEditing(false));
-  const onValueChange = text => dispatch(setSourceText(text));
-  const highlightFn = text => highlight(text, languages.js);
+  const template = useSelector(selectTemplateText);
+  const faded = useSelector(selectShouldShowSourceInput);
 
   return (
-    <EditorContainer>
+    <EditorContainer className={faded ? "faded" : ""}>
       <Editor
-        autoFocus
-        insertSpaces={false}
-        tabSize={1}
         padding={20}
         style={{
           minHeight: "100%",
         }}
-        onBlur={onBlur}
-        value={sourceText}
-        onValueChange={onValueChange}
-        highlight={highlightFn}
+        value={template}
+        onValueChange={text => dispatch(setTemplateText(text))}
+        highlight={text => highlight(text, languages.json)}
       />
     </EditorContainer>
   );
 };
+
+TemplateInput.whyDidYouRender = true;
+
+export default React.memo(TemplateInput);

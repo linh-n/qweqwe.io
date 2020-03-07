@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-json";
-import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
 
-import { setTemplateText } from "../../reducer";
-import { selectTemplateText } from "../../selectors/inputs";
-import { selectShouldShowSourceInput } from "../../selectors/layout";
+import { setSourceText, setLayoutIsEditing } from "../../reducer";
+import { selectSourceText } from "../../selectors/inputs";
 
 const EditorContainer = styled.div`
   height: 100%;
@@ -17,11 +16,7 @@ const EditorContainer = styled.div`
   overflow: auto;
   resize: none;
   font-family: "Ubuntu Mono";
-  transition: background-color 0.3s ease;
-
-  &.faded {
-    background: rgba(255, 255, 255, 0.45);
-  }
+  position: relative;
 
   scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.15);
   scrollbar-width: thin;
@@ -39,22 +34,33 @@ const EditorContainer = styled.div`
   }
 `;
 
-export default () => {
+const Input = () => {
+  const sourceText = useSelector(selectSourceText);
   const dispatch = useDispatch();
-  const template = useSelector(selectTemplateText);
-  const faded = useSelector(selectShouldShowSourceInput);
+
+  const onBlur = () => dispatch(setLayoutIsEditing(false));
+  const onValueChange = text => dispatch(setSourceText(text));
+  const highlightFn = text => highlight(text, languages.js);
 
   return (
-    <EditorContainer className={faded ? "faded" : ""}>
+    <EditorContainer>
       <Editor
+        autoFocus
+        insertSpaces={false}
+        tabSize={1}
         padding={20}
         style={{
           minHeight: "100%",
         }}
-        value={template}
-        onValueChange={text => dispatch(setTemplateText(text))}
-        highlight={text => highlight(text, languages.json)}
+        onBlur={onBlur}
+        value={sourceText}
+        onValueChange={onValueChange}
+        highlight={highlightFn}
       />
     </EditorContainer>
   );
 };
+
+Input.whyDidYouRender = true;
+
+export default Input;

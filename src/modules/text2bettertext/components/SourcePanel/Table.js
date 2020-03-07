@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { setLayoutIsEditing } from "../../reducer";
 import { selectTableRows } from "../../selectors/rows";
 
-const Table = styled.table`
+const TableStyled = styled.table`
   color: #fff;
   border-spacing: 0;
   min-width: 100%;
@@ -45,12 +45,12 @@ const Table = styled.table`
   }
 `;
 
-export default () => {
+const SourceTable = () => {
   const dispatch = useDispatch();
   const tableRows = useSelector(selectTableRows);
 
   return (
-    <Table onClick={() => dispatch(setLayoutIsEditing(true))}>
+    <TableStyled onClick={() => dispatch(setLayoutIsEditing(true))}>
       {tableRows.length > 0 && (
         <>
           <thead>
@@ -77,6 +77,10 @@ export default () => {
           </tbody>
         </>
       )}
-    </Table>
+    </TableStyled>
   );
 };
+
+SourceTable.whyDidYouRender = true;
+
+export default SourceTable;

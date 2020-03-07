@@ -8,7 +8,7 @@ import Header from "components/Header";
 
 import Home from "pages/Home";
 
-export default () => (
+const App = () => (
   <Background>
     <AppContainer>
       <Header />
@@ -20,3 +20,7 @@ export default () => (
     </AppContainer>
   </Background>
 );
+
+App.whyDidYouRender = true;
+
+export default App;

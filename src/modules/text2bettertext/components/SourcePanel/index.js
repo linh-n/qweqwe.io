@@ -5,7 +5,7 @@ import { selectShouldShowSourceInput } from "../../selectors/layout";
 import Input from "./Input";
 import Table from "./Table";
 
-export default () => {
+const SourcePanel = () => {
   const shouldEdit = useSelector(selectShouldShowSourceInput);
 
   if (shouldEdit) {
@@ -14,3 +14,7 @@ export default () => {
     return <Table />;
   }
 };
+
+SourcePanel.whyDidYouRender = true;
+
+export default React.memo(SourcePanel);
