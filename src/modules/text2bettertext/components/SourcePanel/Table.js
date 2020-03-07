@@ -51,7 +51,7 @@ const SourceTable = () => {
 
   return (
     <TableStyled onClick={() => dispatch(setLayoutIsEditing(true))}>
-      {tableRows.length > 0 && (
+      {sourceArray.length > 0 && (
         <>
           <thead>
             <tr>
