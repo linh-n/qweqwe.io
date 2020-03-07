@@ -1,3 +1,19 @@
+export const indexToColumn = index => {
+  if (index === undefined || index === null || index < 0) {
+    return null;
+  }
+
+  let residue = parseInt(index);
+  let alphabetIndice = [];
+  while (residue >= 26) {
+    alphabetIndice.push(residue % 26);
+    residue = residue / 26 - 1;
+  }
+  alphabetIndice.push(residue);
+
+  return alphabetIndice.reduce((prev, curr) => String.fromCharCode(65 + curr) + prev, "");
+};
+
 export default sourceText => {
   if (!sourceText) {
     return [];
@@ -8,9 +24,9 @@ export default sourceText => {
     row.split(/\t/).reduce(
       (prev, curr, indx) => ({
         ...prev,
-        [indx + 1]: curr,
+        [indexToColumn(indx)]: curr,
       }),
-      { index: rowIndex }
+      { index: rowIndex + 1 }
     )
   );
 
