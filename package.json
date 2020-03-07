@@ -19,6 +19,7 @@
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.6",
     "@reduxjs/toolkit": "^1.2.5",
+    "@welldone-software/why-did-you-render": "^4.0.5",
     "connected-react-router": "^6.7.0",
     "core-js": "^3.6.4",
     "express": "^4.17.1",
