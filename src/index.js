@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader/root";
 import React from "react";
 import WebFont from "webfontloader";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
+import * as ReactRedux from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { ConnectedRouter } from "connected-react-router";
 // import ReactGA from "react-ga";
@@ -20,6 +20,14 @@ import App from "./App";
 
 // ReactGA.initialize("UA-145836494-1");
 
+if (process.env.NODE_ENV === "development") {
+  const whyDidYouRender = require("@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js");
+  whyDidYouRender(React, {
+    trackAllPureComponents: true,
+    trackExtraHooks: [[ReactRedux, "useSelector"]],
+  });
+}
+
 store.dispatch(setAvailableLanguages(availableLanguages));
 store.dispatch(setMessages(messages));
 
@@ -30,7 +38,7 @@ WebFont.load({
 });
 
 const Root = () => (
-  <Provider store={store}>
+  <ReactRedux.Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <ThemeProvider>
         <GlobalStyle />
@@ -41,7 +49,7 @@ const Root = () => (
         </LanguageProvider>
       </ThemeProvider>
     </PersistGate>
-  </Provider>
+  </ReactRedux.Provider>
 );
 
 const HotRot = hot(Root);

@@ -68,6 +68,7 @@ module.exports = {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     alias: {
       "react-dom": "@hot-loader/react-dom",
+      "react-redux": process.env.NODE_ENV === "development" ? "react-redux" : "react-redux/lib",
     },
   },
 };
