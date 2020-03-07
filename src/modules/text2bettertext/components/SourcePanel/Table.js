@@ -26,6 +26,14 @@ const TableStyled = styled.table`
   th {
     padding-top: 15px;
     padding-bottom: 15px;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.5);
+
+    strong {
+      color: #fff;
+      display: inline-block;
+      margin: 0 2px;
+    }
   }
 
   tr {
@@ -55,17 +63,25 @@ const SourceTable = () => {
         <>
           <thead>
             <tr>
-              {Object.keys(sourceArray[0]).map(key => (
-                <th key={`th-${key}`}>{`{${key}}`}</th>
-              ))}
+              <th width={1}></th>
+              {Object.keys(sourceArray[0])
+                .filter(key => key !== "index")
+                .map(key => (
+                  <th key={`th-${key}`}>
+                    {"{"}
+                    <strong>{key}</strong>
+                    {"}"}
+                  </th>
+                ))}
             </tr>
           </thead>
 
           <tbody>
-            {sourceArray.map(item => (
-              <tr key={`row-${item.index}`}>
-                {Object.entries(item).map(([key, value]) => (
-                  <td key={`row-${item.index}-col-${key}`}>{value}</td>
+            {sourceArray.map(({ index, ...data }) => (
+              <tr key={`row-${index}`}>
+                <td>{index}</td>
+                {Object.entries(data).map(([key, value]) => (
+                  <td key={`row-${index}-col-${key}`}>{value}</td>
                 ))}
               </tr>
             ))}
