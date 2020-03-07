@@ -3,13 +3,17 @@ import styled from "styled-components";
 
 import Logo from "./Logo";
 
-const Header = styled.div`
+const HeaderStyled = styled.div`
   padding: 10px ${props => props.theme.containerPadding}px;
   flex: 0 0 auto;
 `;
 
-export default () => (
-  <Header>
+const Header = () => (
+  <HeaderStyled>
     <Logo />
-  </Header>
+  </HeaderStyled>
 );
+
+Header.whyDidYouRender = true;
+
+export default Header;

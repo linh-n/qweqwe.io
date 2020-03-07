@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import LayoutSelector from "./LayoutSelector";
 
-const StatusBar = styled.div`
+const StatusBarStyled = styled.div`
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
@@ -13,9 +13,13 @@ const StatusBar = styled.div`
   }
 `;
 
-export default () => (
-  <StatusBar>
+const StatusBar = () => (
+  <StatusBarStyled>
     <div></div>
     <LayoutSelector />
-  </StatusBar>
+  </StatusBarStyled>
 );
+
+StatusBar.whyDidYouRender = true;
+
+export default React.memo(StatusBar);
