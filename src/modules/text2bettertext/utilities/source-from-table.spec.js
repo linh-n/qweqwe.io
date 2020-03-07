@@ -31,6 +31,6 @@ describe("[Utility] Table to source array converter", () => {
     expect(result).toHaveLength(2); // 1 empty line -> only 2 items
     expect(result[1]["1"]).toBe("Switzerland"); // second item being Switzerland
     expect(result[1]["2"]).toBe(""); // empty cell
-    expect(result[1]["3"]).toBe("42"); // empty cell
+    expect(result[1]["3"]).toBe("42");
   });
 });

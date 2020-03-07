@@ -29,8 +29,8 @@ describe("[Utility] Source array transformer", () => {
   });
 
   it("should skip empty items if param has isRequired", () => {
-    const source = [{ "1": "dog" }, { "2": "" }];
-    const template = "a {1!} is a {1}";
+    const source = [{ "1": "dog" }, { "1": "", "2": "cat" }, { "1": "mouse", "2": "sloth" }];
+    const template = "a {1!} is not a {2!}";
 
     expect(transform({ source, template })).toHaveLength(1);
   });
