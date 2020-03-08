@@ -11,7 +11,7 @@ const TableStyled = styled.table`
   min-width: 100%;
   height: 100%;
   cursor: text;
-  font-family: "Ubuntu Mono";
+  font-family: ${props => props.theme.fontFamilyMono};
   table-layout: fixed;
 
   thead {

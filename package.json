@@ -35,7 +35,6 @@
     "react-simple-code-editor": "^0.11.0",
     "react-splitter-layout": "^4.0.0",
     "react-spring": "^9.0.0-beta.34",
-    "react-use-dimensions": "^1.2.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-observable": "^1.2.0",
