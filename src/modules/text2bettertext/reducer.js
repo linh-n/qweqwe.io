@@ -4,6 +4,7 @@ import { defaultState } from "./defaults";
 export const setSourceText = createAction("[Text transformer] Set original text");
 export const setTemplateText = createAction("[Text transformer] Set template text");
 
+export const saveFunction = createAction("[Text transformer] Try set function");
 export const setFunction = createAction("[Text transformer] Set function");
 
 export const setLayoutCurrent = createAction("[Text transformer] Set layout");
@@ -14,23 +15,26 @@ export const setLayoutSplitPane2 = createAction("[Text transformer] Set layout s
 export default createReducer(
   { ...defaultState },
   {
-    [setSourceText]: (state, action) => {
-      state.sourceText = action.payload;
+    [setFunction]: (state, { payload: { name, functionStr } }) => {
+      state.functions.push({ [name]: functionStr });
     },
-    [setTemplateText]: (state, action) => {
-      state.templateText = action.payload;
+    [setSourceText]: (state, { payload }) => {
+      state.sourceText = payload;
     },
-    [setLayoutCurrent]: (state, action) => {
-      state.layout.currentLayout = action.payload;
+    [setTemplateText]: (state, { payload }) => {
+      state.templateText = payload;
     },
-    [setLayoutIsEditing]: (state, action) => {
-      state.layout.isEditing = action.payload;
+    [setLayoutCurrent]: (state, { payload }) => {
+      state.layout.currentLayout = payload;
     },
-    [setLayoutSplitPane1]: (state, action) => {
-      state.layout.splitPane1 = action.payload;
+    [setLayoutIsEditing]: (state, { payload }) => {
+      state.layout.isEditing = payload;
     },
-    [setLayoutSplitPane2]: (state, action) => {
-      state.layout.splitPane2 = action.payload;
+    [setLayoutSplitPane1]: (state, { payload }) => {
+      state.layout.splitPane1 = payload;
+    },
+    [setLayoutSplitPane2]: (state, { payload }) => {
+      state.layout.splitPane2 = payload;
     },
   }
 );

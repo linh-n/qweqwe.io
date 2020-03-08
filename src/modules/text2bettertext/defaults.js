@@ -1,6 +1,7 @@
 export const defaultState = {
   sourceText: "",
   templateText: "",
+  functions: [],
   layout: {
     currentLayout: "⫞",
     isEditing: false,
