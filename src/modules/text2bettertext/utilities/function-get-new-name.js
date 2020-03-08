@@ -1,17 +1,21 @@
-export default ({ existingNames = [], nameTemplate = "function_" }) => {
-  if (existingNames === null || existingNames === undefined) {
-    return null;
+export default ({ existingNames = [], proposedName = "newFunction" }) => {
+  if (!existingNames || existingNames.length === 0) {
+    return proposedName;
   }
 
-  const regex = new RegExp(`${nameTemplate}(\\d+)`, "g");
+  const regex = new RegExp(`${proposedName}_?(\\d+)?`);
   const lastNumberInName = existingNames.reduce((prev, curr) => {
     const match = regex.exec(curr);
-    if (match?.length > 1) {
-      const numberInName = parseInt(match[1]);
+    if (match) {
+      const numberInName = parseInt(match[1] || 0);
       return Math.max(numberInName, prev);
     }
     return prev;
-  }, 0);
+  }, -1);
 
-  return `${nameTemplate}${lastNumberInName + 1}`;
+  if (lastNumberInName === -1) {
+    return proposedName;
+  }
+
+  return `${proposedName}_${lastNumberInName + 1}`;
 };

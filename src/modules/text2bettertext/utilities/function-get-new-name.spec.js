@@ -1,30 +1,39 @@
 import getNewFunctionName from "./function-get-new-name";
 
 describe("[Utility] Get new function name", () => {
-  it("should return null if existing function names null/undefined", () => {
+  it("should accept name if existing function names null/undefined", () => {
     expect(
       getNewFunctionName({
         existingNames: null,
+        proposedName: "functionName",
       })
-    ).toBeNull();
+    ).toEqual("functionName");
     expect(
       getNewFunctionName({
-        existingNames: null,
+        existingNames: undefined,
+        proposedName: "functionName",
       })
-    ).toBeNull();
+    ).toEqual("functionName");
+  });
+
+  it("should add _1 if an identical name exist", () => {
+    const existingNames = ["newFunction", "delete", "add"];
+    const proposedName = "newFunction";
+
+    expect(getNewFunctionName({ existingNames, proposedName })).toEqual("newFunction_1");
   });
 
   it("should return n+1 name", () => {
-    const existingNames = ["function_1", "delete", "function_2", "add"];
-    const nameTemplate = "function_";
+    const existingNames = ["newFunction", "newFunction_1", "delete", "add"];
+    const proposedName = "newFunction";
 
-    expect(getNewFunctionName({ existingNames, nameTemplate })).toEqual("function_3");
+    expect(getNewFunctionName({ existingNames, proposedName })).toEqual("newFunction_2");
   });
 
-  it("should return function_1 if no names match template", () => {
+  it("should accept proposed name if no names match template", () => {
     const existingNames = ["edit", "delete", "add"];
-    const nameTemplate = "function_";
+    const proposedName = "newFunction";
 
-    expect(getNewFunctionName({ existingNames, nameTemplate })).toEqual("function_1");
+    expect(getNewFunctionName({ existingNames, proposedName })).toEqual("newFunction");
   });
 });
