@@ -2,12 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug",
-      "type": "firefox",
+      "name": "Debug Jest Tests",
+      "type": "node",
       "request": "launch",
-      "reAttach": true,
-      "url": "http://localhost:8400",
-      "webRoot": "${workspaceFolder}"
+      "runtimeArgs": ["--inspect-brk", "${workspaceRoot}/node_modules/jest/bin/jest.js", "--runInBand"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
     }
   ]
 }
