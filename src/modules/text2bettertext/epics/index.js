@@ -1,4 +1,4 @@
 import { combineEpics } from "redux-observable";
-import functionsEpic from "./functions";
+import saveFunctionEpic from "./save-function";
 
-export default combineEpics(functionsEpic);
+export default combineEpics(saveFunctionEpic);
