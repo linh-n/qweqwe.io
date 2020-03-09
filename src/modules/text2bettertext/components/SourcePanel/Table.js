@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { setLayoutIsEditing } from "../../reducer";
+import { setLayoutIsEditingSource } from "../../reducer";
 import { selectSourceArray } from "../../selectors/source-array";
 
 const TableStyled = styled.table`
@@ -58,7 +58,7 @@ const SourceTable = () => {
   const sourceArray = useSelector(selectSourceArray);
 
   return (
-    <TableStyled onClick={() => dispatch(setLayoutIsEditing(true))}>
+    <TableStyled onClick={() => dispatch(setLayoutIsEditingSource(true))}>
       {sourceArray.length > 0 && (
         <>
           <thead>

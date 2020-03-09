@@ -4,7 +4,7 @@ export const defaultState = {
   functions: [],
   layout: {
     currentLayout: "⫞",
-    isEditing: false,
+    isEditingSource: false,
     splitPaneVertical: 50,
     splitPaneHorizontal: 50,
   },

@@ -7,7 +7,7 @@ import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 
-import { setSourceText, setLayoutIsEditing } from "../../reducer";
+import { setSourceText, setLayoutIsEditingSource } from "../../reducer";
 import { selectSourceText } from "../../selectors/inputs";
 
 const EditorContainer = styled.div`
@@ -38,7 +38,7 @@ const Input = () => {
   const sourceText = useSelector(selectSourceText);
   const dispatch = useDispatch();
 
-  const onBlur = () => dispatch(setLayoutIsEditing(false));
+  const onBlur = () => dispatch(setLayoutIsEditingSource(false));
   const onValueChange = text => dispatch(setSourceText(text));
   const highlightFn = text => highlight(text, languages.js);
 

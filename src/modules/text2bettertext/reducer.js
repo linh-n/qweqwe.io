@@ -8,7 +8,7 @@ export const saveFunction = createAction("[Text transformer] Try set function");
 export const setFunction = createAction("[Text transformer] Set function");
 
 export const setLayoutCurrent = createAction("[Text transformer] Set layout");
-export const setLayoutIsEditing = createAction("[Text transformer] Set layout isEditing state");
+export const setLayoutIsEditingSource = createAction("[Text transformer] Set editing source state");
 export const setLayoutSplitPane1 = createAction("[Text transformer] Set layout split pane 1");
 export const setLayoutSplitPane2 = createAction("[Text transformer] Set layout split pane 2");
 
@@ -27,8 +27,8 @@ export default createReducer(
     [setLayoutCurrent]: (state, { payload }) => {
       state.layout.currentLayout = payload;
     },
-    [setLayoutIsEditing]: (state, { payload }) => {
-      state.layout.isEditing = payload;
+    [setLayoutIsEditingSource]: (state, { payload }) => {
+      state.layout.isEditingSource = payload;
     },
     [setLayoutSplitPane1]: (state, { payload }) => {
       state.layout.splitPane1 = payload;
