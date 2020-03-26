@@ -4,7 +4,7 @@ import { saveFunction, setFunction } from "../reducer";
 
 import extractFunctionName from "../utilities/function-extract-name";
 
-export default (action$, state$) =>
+export default action$ =>
   action$.pipe(
     ofType(saveFunction),
     mergeMap(({ payload }) => {
