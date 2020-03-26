@@ -30,11 +30,16 @@ const TableStyled = styled.table`
     padding: 0 10px;
   }
 
+  td.index {
+    font-weight: ${props => props.theme.fontWeightBold};
+    color: rgba(255, 255, 255, 0.6);
+  }
+
   th {
     padding-top: 15px;
     padding-bottom: 15px;
     white-space: nowrap;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.6);
 
     strong {
       color: #fff;
@@ -87,7 +92,7 @@ const SourceTable = () => {
             <tbody>
               {sourceArray.map(({ index, ...data }) => (
                 <tr key={`row-${index}`}>
-                  <td>{index}</td>
+                  <td className="index">{index}</td>
                   {Object.entries(data).map(([key, value]) => (
                     <td key={`row-${index}-col-${key}`}>{value}</td>
                   ))}
