@@ -8,11 +8,7 @@ import Table from "./Table";
 const SourcePanel = () => {
   const shouldEdit = useSelector(selectShouldShowSourceInput);
 
-  if (shouldEdit) {
-    return <Input />;
-  } else {
-    return <Table />;
-  }
+  return <>{shouldEdit ? <Input /> : <Table />}</>;
 };
 
 SourcePanel.whyDidYouRender = true;

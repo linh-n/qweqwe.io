@@ -9,7 +9,6 @@ import "prismjs/components/prism-javascript";
 
 import { setSourceText, setLayoutIsEditingSource } from "../../reducer";
 import { selectSourceText } from "../../selectors/inputs";
-import Instruction from "../Instruction";
 
 const EditorContainer = styled.div`
   height: 100%;
@@ -17,7 +16,6 @@ const EditorContainer = styled.div`
   overflow: auto;
   resize: none;
   font-family: ${props => props.theme.fontFamilyMono};
-  position: relative;
 
   scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.15);
   scrollbar-width: thin;
@@ -58,7 +56,6 @@ const Input = () => {
         onValueChange={onValueChange}
         highlight={highlightFn}
       />
-      <Instruction>1. Paste table here</Instruction>
     </EditorContainer>
   );
 };
