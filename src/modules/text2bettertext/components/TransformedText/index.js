@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { selectTransformedText } from "../../selectors/transform";
-import Instruction from "../Instruction";
 
 const Transformed = styled.div`
   background: rgba(0, 0, 0, 0.15);
@@ -23,7 +22,6 @@ export default () => {
   return (
     <Transformed>
       <pre>{transformedText.join("\n")}</pre>
-      <Instruction>3. Profit</Instruction>
     </Transformed>
   );
 };
