@@ -9,6 +9,7 @@ import "prismjs/components/prism-javascript";
 
 import { setSourceText, setLayoutIsEditingSource } from "../../reducer";
 import { selectSourceText } from "../../selectors/inputs";
+import Instruction from "../Instruction";
 
 const EditorContainer = styled.div`
   height: 100%;
@@ -57,6 +58,7 @@ const Input = () => {
         onValueChange={onValueChange}
         highlight={highlightFn}
       />
+      <Instruction>1. Paste excel table here</Instruction>
     </EditorContainer>
   );
 };

@@ -4,6 +4,13 @@ import styled from "styled-components";
 
 import { setLayoutIsEditingSource } from "../../reducer";
 import { selectSourceArray } from "../../selectors/source-array";
+import Instruction from "../Instruction";
+
+const TableContainer = styled.div`
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+`;
 
 const TableStyled = styled.table`
   color: #fff;
@@ -58,42 +65,45 @@ const SourceTable = () => {
   const sourceArray = useSelector(selectSourceArray);
 
   return (
-    <TableStyled onClick={() => dispatch(setLayoutIsEditingSource(true))}>
-      {sourceArray.length > 0 && (
-        <>
-          <thead>
-            <tr>
-              <th width={1}></th>
-              {Object.keys(sourceArray[0])
-                .filter(key => key !== "index")
-                .map(key => (
-                  <th key={`th-${key}`}>
-                    {"{"}
-                    <strong>{key}</strong>
-                    {"}"}
-                  </th>
-                ))}
-            </tr>
-          </thead>
+    <TableContainer>
+      <TableStyled onClick={() => dispatch(setLayoutIsEditingSource(true))}>
+        {sourceArray.length > 0 && (
+          <>
+            <thead>
+              <tr>
+                <th width={1}></th>
+                {Object.keys(sourceArray[0])
+                  .filter(key => key !== "index")
+                  .map(key => (
+                    <th key={`th-${key}`}>
+                      {"{"}
+                      <strong>{key}</strong>
+                      {"}"}
+                    </th>
+                  ))}
+              </tr>
+            </thead>
 
-          <tbody>
-            {sourceArray.map(({ index, ...data }) => (
-              <tr key={`row-${index}`}>
-                <td>{index}</td>
-                {Object.entries(data).map(([key, value]) => (
-                  <td key={`row-${index}-col-${key}`}>{value}</td>
+            <tbody>
+              {sourceArray.map(({ index, ...data }) => (
+                <tr key={`row-${index}`}>
+                  <td>{index}</td>
+                  {Object.entries(data).map(([key, value]) => (
+                    <td key={`row-${index}-col-${key}`}>{value}</td>
+                  ))}
+                </tr>
+              ))}
+              <tr className="filler">
+                {Object.keys(sourceArray[0]).map(key => (
+                  <th key={`td-filler-${key}`}>&nbsp;</th>
                 ))}
               </tr>
-            ))}
-            <tr className="filler">
-              {Object.keys(sourceArray[0]).map(key => (
-                <th key={`td-filler-${key}`}>&nbsp;</th>
-              ))}
-            </tr>
-          </tbody>
-        </>
-      )}
-    </TableStyled>
+            </tbody>
+          </>
+        )}
+      </TableStyled>
+      <Instruction>1. Paste excel table here</Instruction>
+    </TableContainer>
   );
 };
 

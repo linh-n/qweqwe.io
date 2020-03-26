@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 import Input from "./Input";
 import Functions from "./Functions/FunctionsList";
+import Instruction from "../Instruction";
 
 const TemplatePanelStyled = styled.div`
   display: flex;
   flex: 1;
+  position: relative;
 `;
 
 const InputPanel = styled.div`
@@ -29,6 +31,7 @@ const TemplatePanel = () => (
     <ListPanel>
       <Functions />
     </ListPanel>
+    <Instruction>2. Set template</Instruction>
   </TemplatePanelStyled>
 );
 
