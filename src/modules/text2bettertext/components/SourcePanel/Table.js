@@ -107,7 +107,7 @@ const SourceTable = () => {
           </>
         )}
       </TableStyled>
-      <Instruction>1. Paste excel table here</Instruction>
+      <Instruction>1. Paste table here</Instruction>
     </TableContainer>
   );
 };

@@ -58,7 +58,7 @@ const Input = () => {
         onValueChange={onValueChange}
         highlight={highlightFn}
       />
-      <Instruction>1. Paste excel table here</Instruction>
+      <Instruction>1. Paste table here</Instruction>
     </EditorContainer>
   );
 };
