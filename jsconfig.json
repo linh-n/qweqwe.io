@@ -6,5 +6,8 @@
     "checkJs": true,
     "baseUrl": "./src"
   },
-  "include": ["src", "public/service-worker.js"]
+  "include": ["src", "public/service-worker.js"],
+  "typeAcquisition": {
+    "include": ["jest"]
+  }
 }

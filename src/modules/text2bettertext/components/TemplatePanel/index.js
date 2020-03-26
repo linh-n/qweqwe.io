@@ -1,64 +1,37 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-json";
-import "prismjs/themes/prism-solarizedlight.css";
+import Input from "./Input";
+import Functions from "./Functions/FunctionsList";
 
-import { setTemplateText } from "../../reducer";
-import { selectTemplateText } from "../../selectors/inputs";
-import { selectShouldShowSourceInput } from "../../selectors/layout";
-
-const EditorContainer = styled.div`
-  height: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  overflow: auto;
-  resize: none;
-  font-family: "Ubuntu Mono";
-  transition: background-color 0.3s ease;
-
-  &.faded {
-    background: rgba(255, 255, 255, 0.45);
-  }
-
-  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.15);
-  scrollbar-width: thin;
-
-  &::-webkit-scrollbar {
-    width: 7.5px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.5);
-  }
+const TemplatePanelStyled = styled.div`
+  display: flex;
+  flex: 1;
 `;
 
-const TemplateInput = () => {
-  const dispatch = useDispatch();
-  const template = useSelector(selectTemplateText);
-  const faded = useSelector(selectShouldShowSourceInput);
+const InputPanel = styled.div`
+  display: flex;
+  flex: 1;
+`;
 
-  return (
-    <EditorContainer className={faded ? "faded" : ""}>
-      <Editor
-        padding={20}
-        style={{
-          minHeight: "100%",
-        }}
-        value={template}
-        onValueChange={text => dispatch(setTemplateText(text))}
-        highlight={text => highlight(text, languages.json)}
-      />
-    </EditorContainer>
-  );
-};
+const ListPanel = styled.div`
+  display: flex;
+  flex: 0 1 auto;
+  width: 250px;
+  background: rgba(0, 0, 0, 0.1);
+`;
 
-TemplateInput.whyDidYouRender = true;
+const TemplatePanel = () => (
+  <TemplatePanelStyled>
+    <InputPanel>
+      <Input />
+    </InputPanel>
+    <ListPanel>
+      <Functions />
+    </ListPanel>
+  </TemplatePanelStyled>
+);
 
-export default React.memo(TemplateInput);
+TemplatePanel.whyDidYouRender = true;
+
+export default React.memo(TemplatePanel);

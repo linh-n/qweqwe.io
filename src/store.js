@@ -11,6 +11,7 @@ import { combineEpics, createEpicMiddleware } from "redux-observable";
 
 import { uiReducer, uiEpic } from "modules/ui";
 import text2bettertextReducer from "modules/text2bettertext/reducer";
+import text2bettertextEpics from "modules/text2bettertext/epics";
 
 export const history = createBrowserHistory();
 
@@ -27,7 +28,7 @@ const persistConfig = {
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const epic$ = new BehaviorSubject(combineEpics(uiEpic));
+const epic$ = new BehaviorSubject(combineEpics(uiEpic, text2bettertextEpics));
 
 const rootEpic = (action$, state$, dependencies) =>
   epic$.pipe(mergeMap(epic => epic(action$, state$, dependencies)));

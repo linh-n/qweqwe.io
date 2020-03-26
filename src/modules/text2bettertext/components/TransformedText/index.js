@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { selectTransformedText } from "../../selectors/transform";
 
-const TransformedStyled = styled.div`
+const Transformed = styled.div`
   background: rgba(0, 0, 0, 0.15);
   flex: 1 1 auto;
 
@@ -12,17 +12,15 @@ const TransformedStyled = styled.div`
     margin: 0;
     padding: 15px ${props => props.theme.containerPadding}px;
     color: #fff;
-    font-family: "Ubuntu Mono";
+    font-family: ${props => props.theme.fontFamilyMono};
   }
 `;
 
-const TransformedText = () => {
+export default () => {
   const transformedText = useSelector(selectTransformedText);
   return (
-    <TransformedStyled>
-      <pre>{transformedText.map(l => l.value).join("\n")}</pre>
-    </TransformedStyled>
+    <Transformed>
+      <pre>{transformedText.join("\n")}</pre>
+    </Transformed>
   );
 };
-
-export default TransformedText;

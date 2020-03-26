@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { setLayoutIsEditing } from "../../reducer";
-import { selectTableRows } from "../../selectors/rows";
+import { setLayoutIsEditingSource } from "../../reducer";
+import { selectSourceArray } from "../../selectors/source-array";
 
 const TableStyled = styled.table`
   color: #fff;
@@ -11,7 +11,7 @@ const TableStyled = styled.table`
   min-width: 100%;
   height: 100%;
   cursor: text;
-  font-family: "Ubuntu Mono";
+  font-family: ${props => props.theme.fontFamilyMono};
   table-layout: fixed;
 
   thead {
@@ -26,6 +26,14 @@ const TableStyled = styled.table`
   th {
     padding-top: 15px;
     padding-bottom: 15px;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.5);
+
+    strong {
+      color: #fff;
+      display: inline-block;
+      margin: 0 2px;
+    }
   }
 
   tr {
@@ -47,31 +55,39 @@ const TableStyled = styled.table`
 
 const SourceTable = () => {
   const dispatch = useDispatch();
-  const tableRows = useSelector(selectTableRows);
+  const sourceArray = useSelector(selectSourceArray);
 
   return (
-    <TableStyled onClick={() => dispatch(setLayoutIsEditing(true))}>
-      {tableRows.length > 0 && (
+    <TableStyled onClick={() => dispatch(setLayoutIsEditingSource(true))}>
+      {sourceArray.length > 0 && (
         <>
           <thead>
             <tr>
-              {tableRows[0].cells.map(cell => (
-                <th key={`th-${cell.index}`}>{`{${cell.index + 1}}`}</th>
-              ))}
+              <th width={1}></th>
+              {Object.keys(sourceArray[0])
+                .filter(key => key !== "index")
+                .map(key => (
+                  <th key={`th-${key}`}>
+                    {"{"}
+                    <strong>{key}</strong>
+                    {"}"}
+                  </th>
+                ))}
             </tr>
           </thead>
 
           <tbody>
-            {tableRows.map(row => (
-              <tr key={`row-${row.index}`}>
-                {row.cells.map(cell => (
-                  <td key={`row-${row.index}-col-${cell.index}`}>{cell.value}</td>
+            {sourceArray.map(({ index, ...data }) => (
+              <tr key={`row-${index}`}>
+                <td>{index}</td>
+                {Object.entries(data).map(([key, value]) => (
+                  <td key={`row-${index}-col-${key}`}>{value}</td>
                 ))}
               </tr>
             ))}
             <tr className="filler">
-              {tableRows[0].cells.map(cell => (
-                <td key={`td-filler-${cell.index}`}>&nbsp;</td>
+              {Object.keys(sourceArray[0]).map(key => (
+                <th key={`td-filler-${key}`}>&nbsp;</th>
               ))}
             </tr>
           </tbody>
